@@ -1,4 +1,5 @@
 return {
+  require("quri.langs.c"),
 	require("quri.langs.go"),
 	require("quri.langs.lua"),
 	require("quri.langs.rust"),

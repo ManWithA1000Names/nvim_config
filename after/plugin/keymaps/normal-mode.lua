@@ -3,10 +3,16 @@ if not wk_ok then
 	return
 end
 
+local active_term = nil
 local function new_term()
 	local ok, term = pcall(require, "toggleterm.terminal")
 	if ok then
-		term.Terminal:new():toggle()
+		if active_term == nil then
+			active_term = term.Terminal:new({
+				direction = "horizontal",
+			})
+		end
+		active_term:toggle()
 	end
 end
 
@@ -61,6 +67,51 @@ local function nvim_tree_focus_toggle()
 	end
 end
 
+local function buffer_kill()
+	-- copied and modified from lunarvim ...lvim/lua/lvim/core/bufferline.lua;
+	local kill_command = "bd!"
+
+	local bo = vim.bo
+	local api = vim.api
+
+	local bufnr = api.nvim_get_current_buf()
+
+	-- Get list of windows IDs with the buffer to close
+	local windows = vim.tbl_filter(function(win)
+		return api.nvim_win_get_buf(win) == bufnr
+	end, api.nvim_list_wins())
+
+	if #windows == 0 then
+		return
+	end
+
+	-- Get list of active buffers
+	local current_buffers = vim.tbl_filter(function(buf)
+		return api.nvim_buf_is_valid(buf) and bo[buf].buflisted
+	end, api.nvim_list_bufs())
+
+	-- If there is only one buffer (which has to be the current one), vim will
+	-- create a new buffer on :bd.
+	-- For more than one buffer, pick the previous buffer (wrapping around if necessary)
+	if #current_buffers > 1 then
+		for i, v in ipairs(current_buffers) do
+			if v == bufnr then
+				local prev_buf_idx = i == 1 and (#current_buffers - 1) or (i - 1)
+				local prev_buffer = current_buffers[prev_buf_idx]
+				for _, win in ipairs(windows) do
+					api.nvim_win_set_buf(win, prev_buffer)
+				end
+			end
+		end
+	end
+
+	-- Check if buffer still exists, to ensure the target buffer wasn't killed
+	-- due to options like bufhidden=wipe.
+	if api.nvim_buf_is_valid(bufnr) and bo[bufnr].buflisted then
+		vim.cmd(string.format("%s %d", kill_command, bufnr))
+	end
+end
+
 local keys = {
 	Y = { "yg$", "Copy to end of line" },
 	Q = { "<nop>", "Disable command mode" },
@@ -92,7 +143,7 @@ local leaderKeys = {
 	T = { new_term, "New terminal" },
 	b = { buffers, "Buffer picker" },
 	f = { find_files, "File picker" },
-	c = { ":bd!<CR>", "Close buffer" },
+	c = { buffer_kill, "Close buffer" },
 	o = { save_source, "Save & source" },
 	v = { ":vsplit<CR>", "Vertical Split" },
 	D = { '"_d', "Delete without copying" },
@@ -105,7 +156,7 @@ local leaderKeys = {
 	E = { ":NvimTreeToggle<CR>", "Nvim tree troggle" },
 	Q = { "<cmd>wqa!<CR>", "Quit all, no matter what" },
 	s = { ":Telescope live_grep<CR>", "Project search" },
-	t = { ":ToggleTermToggleAll<CR>", "Toggle terminal" },
+	t = { ":ToggleTerm<CR>", "Toggle terminal" },
 	S = { ":Telescope spell_suggest<CR>", "Spelling suggestions" },
 	Y = { '"+Y', "Copy rest of the line to system clipboard", noremap = true },
 
@@ -115,6 +166,7 @@ local leaderKeys = {
 		p = { ":e " .. vim.fn.stdpath("config") .. "/lua/quri/packer.lua<CR>", "Edit packer file" },
 		P = { ":PackerSync<CR>", "Packer Sync" },
 	},
+
 	g = {
 		name = "git",
 		-- Gitsigns
