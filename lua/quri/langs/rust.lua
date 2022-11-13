@@ -11,7 +11,7 @@ local codelldb_adapter = {
 }
 return lang("rust")
 	:use("simrat39/rust-tools.nvim")
-	:server("rust_analyzer", function()
+	:server("rust_analyzer", function(_)
 		local ok, rust = pcall(require, "rust-tools")
 		if not ok then
 			return

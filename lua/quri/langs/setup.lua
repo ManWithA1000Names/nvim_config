@@ -13,7 +13,7 @@
 ---@field formatter fun(this: LanguageConfig, formatter: string | string[]): LanguageConfig # register a formatter
 ---@field linter fun(this: LanguageConfig, linter: string | string[]): LanguageConfig # register a linter
 ---@field lsp_format fun(this: LanguageConfig, on: boolean): LanguageConfig # set lsp_format on or off (off by default, when at least one formatter is provided)
----@field keymaps fun(this: LanguageConfig, keys: table<string, string[]>): LanguageConfig # set custom keymaps activated on filetype , available under <leader>g
+---@field keymaps fun(this: LanguageConfig, keys: table<string, (string|function)[]>): LanguageConfig # set custom keymaps activated on filetype , available under <leader>g
 ---@field debug fun(this: LanguageConfig, config: table | function): LanguageConfig # set a custom debug config for the language.
 
 ---Create a new langauge module
