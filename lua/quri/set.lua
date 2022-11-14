@@ -22,6 +22,7 @@ vim.opt.hlsearch = true
 vim.opt.incsearch = true
 
 vim.opt.termguicolors = true
+vim.opt.guifont = "FiraCode Nerd Font:h10"
 
 vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
