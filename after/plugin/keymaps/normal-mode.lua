@@ -120,6 +120,7 @@ local keys = {
 	n = { "nzzzv", "Go to next match and center the screen" },
 	N = { "Nzzzv", "Go to prev match and center the screen" },
 
+	["."] = { ";", "next thing" },
 	["'"] = { ":w<CR>", "Save" },
 	["\\"] = { "za", "Fold" },
 	['"'] = { ":nohl<CR>", "no highlight" },
