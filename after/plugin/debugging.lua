@@ -66,7 +66,7 @@ vim.fn.sign_define("DapStopped", {
 
 for lang, config in pairs(require("quri.compiled").debug_configs) do
 	if type(config) == "function" then
-		config(dap)
+		pcall(config, dap)
 	else
 		dap.configurations[lang] = config
 	end

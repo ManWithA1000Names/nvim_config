@@ -14,7 +14,7 @@ local M = {
 	keybinds = {},
 	formatters = {},
 	lspconfigs = {},
-  debug_configs = {},
+	debug_configs = {},
 	skipped_format_servers = {},
 }
 
@@ -57,7 +57,9 @@ local function compile(lang)
 end
 
 for _, lang in ipairs(langs) do
-	compile(lang)
+	if lang then
+		compile(lang)
+	end
 end
 
 return M
