@@ -98,10 +98,10 @@ local config = {
 			configuration = {
 				updateBuildConfiguration = "interactive",
 				runtimes = {
-					--[[ { ]]
-					--[[ 	name = "JavaSE-11", ]]
-					--[[ 	path = "~/.sdkman/candidates/java/11.0.2-open", ]]
-					--[[ }, ]]
+					{
+						name = "JavaSE-11",
+						path = "/usr/lib/jvm/java-11-openjdk",
+					},
 					--[[ { ]]
 					--[[ 	name = "JavaSE-18", ]]
 					--[[ 	path = "~/.sdkman/candidates/java/18.0.1.1-open", ]]
@@ -179,11 +179,10 @@ local java = lang("java")
 		vim.api.nvim_create_autocmd("FileType", {
 			pattern = { "java" },
 			callback = function()
-				print("what")
 				jdtls.start_or_attach(config)
-				-- require("jdtls.dap").setup_dap_main_class_configs() 
-				-- jdtls.setup_dap({ hotcodereplace = "auto" })  
-        -- ^^^^^^^^^^^^^^^ I don't know about this one!
+				-- require("jdtls.dap").setup_dap_main_class_configs()
+				-- jdtls.setup_dap({ hotcodereplace = "auto" })
+				-- ^^^^^^^^^^^^^^^ I don't know about this one!
 			end,
 		})
 	end)

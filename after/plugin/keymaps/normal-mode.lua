@@ -124,6 +124,7 @@ local keys = {
 	["'"] = { ":w<CR>", "Save" },
 	["\\"] = { "za", "Fold" },
 	['"'] = { ":nohl<CR>", "no highlight" },
+	["<C-i>"] = { "<C-i>", "jump forward" },
 	["<C-h>"] = { "<C-w>h", "Move to the window to the left" },
 	["<C-j>"] = { "<C-w>j", "Move to the window below" },
 	["<C-k>"] = { "<C-w>k", "Move to the window above" },
