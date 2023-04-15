@@ -51,3 +51,6 @@ vim.opt.foldmethod = "indent"
 -- Global Variables
 vim.g.leader = " "
 vim.g.mapleader = " "
+vim.g.markdown_fenced_languages = {
+	"ts=typescript",
+}

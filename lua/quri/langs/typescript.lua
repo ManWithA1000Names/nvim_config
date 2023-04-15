@@ -1,4 +1,5 @@
 local lang = require("quri.langs.setup")
+local util = require("lspconfig.util")
 
 return lang("typescript")
 	:use({
@@ -9,7 +10,18 @@ return lang("typescript")
 			})
 		end,
 	})
-	:server("tsserver")
+	:server("tsserver", {
+		root_dir = function(fname)
+			return util.root_pattern("package.json")(fname)
+		end,
+		single_file_support = false,
+	})
+	:server("denols", {
+		root_dir = function(fname)
+			return util.root_pattern("deno.json", "deno.jsonc")(fname)
+		end,
+		single_file_support = false,
+	})
 	:server("eslint")
 	:formatter("prettier")
 	:keymaps({
