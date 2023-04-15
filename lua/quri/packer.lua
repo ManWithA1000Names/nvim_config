@@ -81,8 +81,8 @@ local default_plugins = {
 		tag = "*",
 		config = function()
 			require("toggleterm").setup({
-        direction = "float"
-      })
+				direction = "float",
+			})
 		end,
 	},
 	-- autopairs
@@ -91,10 +91,20 @@ local default_plugins = {
 	-- commenting
 	"numToStr/Comment.nvim",
 	"JoosepAlviste/nvim-ts-context-commentstring",
-  -- git
-  {"lewis6991/gitsigns.nvim", config = function ()
-    require("gitsigns").setup()
-  end}
+	-- git
+	{
+		"lewis6991/gitsigns.nvim",
+		config = function()
+			require("gitsigns").setup()
+		end,
+	},
+	-- project detection,
+	{
+		"ahmedkhalf/project.nvim",
+		config = function()
+			require("project_nvim").setup()
+		end,
+	},
 }
 
 local lang_plugins = require("quri.compiled").packer

@@ -1,6 +1,6 @@
 local lang = require("quri.langs.setup")
 
-local lua = lang("lua"):use("hrsh7th/cmp-nvim-lua", true):formatter("stylua"):server("sumneko_lua", {
+local lua = lang("lua"):use("hrsh7th/cmp-nvim-lua", true):formatter("stylua"):server("lua_ls", {
 	settings = {
 		Lua = {
 			diagnostics = {
