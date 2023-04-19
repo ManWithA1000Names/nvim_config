@@ -161,6 +161,8 @@ local leaderKeys = {
 	t = { ":ToggleTerm<CR>", "Toggle terminal" },
 	S = { ":Telescope spell_suggest<CR>", "Spelling suggestions" },
 	Y = { '"+Y', "Copy rest of the line to system clipboard", noremap = true },
+  n = { ":cnext<CR>", "Next item on the quick fix list", noremap = true},
+  N = { ":cprev<CR>", "Previous item on the quick fix list", noremap = true},
 
 	V = {
 		name = "vim",
