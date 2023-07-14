@@ -3,16 +3,39 @@ if not wk_ok then
 	return
 end
 
-local active_term = nil
 local function new_term()
 	local ok, term = pcall(require, "toggleterm.terminal")
-	if ok then
+	if not ok then
+		return function()
+			print("Failed to ruquire 'toggleterm.terminal'")
+		end
+	end
+	local active_term = nil
+	return function()
 		if active_term == nil then
 			active_term = term.Terminal:new({
 				direction = "horizontal",
 			})
 		end
 		active_term:toggle()
+	end
+end
+
+local function custom_toggle_term()
+	local ok, term = pcall(require, "toggleterm.terminal")
+	if not ok then
+		return function()
+			print("failed to require 'toggleterm.terminal'")
+		end
+	end
+	local active = nil
+	return function()
+		if active == nil then
+			active = term.Terminal:new({
+				direction = "float",
+			})
+		end
+		active:toggle()
 	end
 end
 
@@ -142,7 +165,7 @@ local keys = {
 local leaderKeys = {
 	q = { ":qa<CR>", "Quit all" },
 	w = { ":wa<CR>", "Save all" },
-	T = { new_term, "New terminal" },
+	T = { new_term(), "New terminal" },
 	b = { buffers, "Buffer picker" },
 	f = { find_files, "File picker" },
 	c = { buffer_kill, "Close buffer" },
@@ -158,11 +181,11 @@ local leaderKeys = {
 	E = { ":NvimTreeToggle<CR>", "Nvim tree troggle" },
 	Q = { "<cmd>wqa!<CR>", "Quit all, no matter what" },
 	s = { ":Telescope live_grep<CR>", "Project search" },
-	t = { ":ToggleTerm<CR>", "Toggle terminal" },
+	t = { custom_toggle_term(), "Toggle terminal" },
 	S = { ":Telescope spell_suggest<CR>", "Spelling suggestions" },
 	Y = { '"+Y', "Copy rest of the line to system clipboard", noremap = true },
-  n = { ":cnext<CR>", "Next item on the quick fix list", noremap = true},
-  N = { ":cprev<CR>", "Previous item on the quick fix list", noremap = true},
+	n = { ":cnext<CR>", "Next item on the quick fix list", noremap = true },
+	N = { ":cprev<CR>", "Previous item on the quick fix list", noremap = true },
 
 	V = {
 		name = "vim",

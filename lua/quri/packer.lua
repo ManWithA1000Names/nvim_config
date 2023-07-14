@@ -80,9 +80,7 @@ local default_plugins = {
 		"akinsho/toggleterm.nvim",
 		tag = "*",
 		config = function()
-			require("toggleterm").setup({
-				direction = "float",
-			})
+			require("toggleterm").setup()
 		end,
 	},
 	-- autopairs
