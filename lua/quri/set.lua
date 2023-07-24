@@ -3,6 +3,8 @@ vim.opt.relativenumber = true
 vim.opt.conceallevel = 0
 vim.opt.completeopt = { "menuone", "noselect" }
 
+vim.opt.clipboard = "unnamedplus"
+
 vim.opt.errorbells = false -- no idea
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2

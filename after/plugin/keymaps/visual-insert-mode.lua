@@ -14,9 +14,7 @@ local keysV = {
 
 local leaderKeysV = {
 	d = { '"_d', "Delete wihtout copying" },
-	p = { '"_dP"', "Patse without copying" },
-	y = { '"+y', "Copy to system clipbaord" },
-	P = { '"_d"+P', "Paste from the clipboard without copying" },
+	p = { '"_dP"', "Paste without copying" },
 }
 
 local keysI = {

@@ -173,9 +173,7 @@ local leaderKeys = {
 	v = { ":vsplit<CR>", "Vertical Split" },
 	D = { '"_d', "Delete without copying" },
 	x = { ":split<CR>", "Horizontal Split" },
-	y = { '"+y', "Copy to system clipboard" },
 	W = { "<cmd>wqa<CR>", "Save and quit all" },
-	p = { '"+p', "Paste from system clipboard" },
 	e = { nvim_tree_focus_toggle(), "Nvim tree" },
 	h = { ":lua print('harpooning')<CR>", "Harpoon" },
 	E = { ":NvimTreeToggle<CR>", "Nvim tree troggle" },
@@ -183,7 +181,6 @@ local leaderKeys = {
 	s = { ":Telescope live_grep<CR>", "Project search" },
 	t = { custom_toggle_term(), "Toggle terminal" },
 	S = { ":Telescope spell_suggest<CR>", "Spelling suggestions" },
-	Y = { '"+Y', "Copy rest of the line to system clipboard", noremap = true },
 	n = { ":cnext<CR>", "Next item on the quick fix list", noremap = true },
 	N = { ":cprev<CR>", "Previous item on the quick fix list", noremap = true },
 
